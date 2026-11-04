@@ -1,0 +1,86 @@
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Type checking and linting
+.mypy_cache/
+.ruff_cache/
+.pyright/
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Playwright test artifacts
+test-results/
+playwright-report/
+
+# Local browser profiles and user data
+browser-data/
+user-data/
+```
+
+## Final repository structure
+
+<box border radius="lg" padding={3} gap={2}>
+  <row align="center" gap={2}>
+    <icon name="folder" color="#D6A64A" size="lg"/>
+    **rumble-regex/**
+  </row>
+  <row align="center" gap={2}>
+    <icon name="file-code" color="#4389D6"/> `rumble.py`
+  </row>
+  <row align="center" gap={2}>
+    <icon name="file-text" color="#4389D6"/> `README.md`
+  </row>
+  <row align="center" gap={2}>
+    <icon name="file-text" color="#4389D6"/> `requirements.txt`
+  </row>
+  <row align="center" gap={2}>
+    <icon name="file-cog" color="#888888"/> `.gitignore`
+  </row>
+  <row align="center" gap={2}>
+    <icon name="scale" color="#888888"/> `LICENSE`
+  </row>
+</box>
+
+**Note:** This README follows the supplied documentation. Before publishing, verify that every command-line option and extraction feature described is actually implemented in your current `rumble.py`.
