@@ -596,3 +596,8 @@ See the repository's LICENSE file for licensing information.
 **Main script:** `rumble.py`
 
 **Documentation:** `README.md`
+
+
+## Note
+
+This script is a part of my <a href="https://github.com/zaynkhan100110/ump">ump</a>
