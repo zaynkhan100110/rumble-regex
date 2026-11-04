@@ -15,4 +15,4 @@ This automated scripts use playwright (a browserlike application and send reques
 
 ## Notice :::
 
-Rumble actively change their regex so keep update. Also private video may not be foundable with this script
+Rumble actively change their regex so keep update. Also private video may not be unreachable with this script
