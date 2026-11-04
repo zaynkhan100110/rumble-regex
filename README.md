@@ -4,16 +4,16 @@
 **Extract actual Rumble video player IDs, embed IDs, Shorts clip IDs, and media IDs from Rumble URLs using Python, regular expressions, and Playwright.**
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
-[![Playwright](https://img.shields.io/badge/Browser-Playwright-green)](https://playwright.dev/python/)
+[![Browser](https://img.shields.io/badge/Browser-Playwright-green)](https://playwright.dev/python/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)](#requirements)
 
-Repository: https://github.com/zaynkhan100110/rumble-regex
+**Repository:** https://github.com/zaynkhan100110/rumble-regex
 
 ---
 
 ## Overview
 
-Rumble Regex is a lightweight Python command-line utility designed to inspect Rumble video pages and extract the identifiers used by Rumble's video player.
+Rumble Regex is a Python command-line utility designed to inspect Rumble video pages and extract identifiers used by Rumble's video player.
 
 A normal Rumble video URL does not necessarily expose the same identifier used by its embedded player.
 
@@ -29,7 +29,7 @@ However, the corresponding player may use an embed URL in this format:
 https://rumble.com/embed/EMBED_ID/
 ```
 
-This project attempts to locate the actual player identifier by examining the page's HTML, JavaScript-rendered content, iframe elements, player configuration, and embedded metadata.
+This project attempts to locate the actual player identifier by examining page HTML, JavaScript-rendered content, iframe elements, player configuration, and embedded metadata.
 
 It also supports Rumble Shorts, where the clip ID and underlying media ID may be different identifiers.
 
@@ -58,59 +58,114 @@ It also supports Rumble Shorts, where the clip ID and underlying media ID may be
 rumble-regex/
 │
 ├── rumble.py
+├── requirements.txt
 ├── README.md
+├── .gitignore
 └── LICENSE
 ```
 
 ## Requirements
 
-- Python 3.10 or newer
-- pip
-- Playwright for Python
-- Chromium browser installed through Playwright
-- Internet connection
-- Access to the public Rumble page being inspected
+Before installing Rumble Regex, make sure you have:
+
+| Requirement | Version | Purpose |
+|---|---|---|
+| Python | 3.10 or newer | Runs the extraction script |
+| pip | Latest recommended | Installs Python packages |
+| Playwright | 1.45+ | Browser automation |
+| Chromium | Playwright-managed | Loads and inspects Rumble pages |
+| Internet connection | Required | Accesses Rumble pages |
+
+### Supported operating systems
+
+- Windows 10 or newer
+- Linux
+- macOS
+
+### Python dependencies
+
+The project uses Playwright for browser automation.
+
+The Python dependency is specified in `requirements.txt`.
+
+Chromium is installed separately through Playwright.
 
 ## Installation
 
-### 1. Clone the repository
+Follow these steps to install and configure Rumble Regex.
+
+### 1. Install Python
+
+Download Python 3.10 or newer:
+
+https://www.python.org/downloads/
+
+Verify your installation:
+
+```bash
+python --version
+```
+
+On some Linux/macOS systems, use:
+
+```bash
+python3 --version
+```
+
+### 2. Download the repository
+
+Using Git:
 
 ```bash
 git clone https://github.com/zaynkhan100110/rumble-regex.git
-```
-
-### 2. Enter the project directory
-
-```bash
 cd rumble-regex
 ```
 
+Alternatively, download the repository as a ZIP from GitHub and extract it.
+
 ### 3. Create a virtual environment
 
-Recommended for keeping dependencies isolated.
+A virtual environment keeps project dependencies isolated from other Python projects.
 
-Windows:
+**Windows:**
 
 ```powershell
 py -m venv .venv
 .venv\Scripts\Activate.ps1
 ```
 
-Linux / macOS:
+If PowerShell blocks activation, use Command Prompt:
+
+```cmd
+.venv\Scripts\activate.bat
+```
+
+**Linux / macOS:**
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### 4. Install Playwright
+### 4. Upgrade pip
 
 ```bash
 python -m pip install --upgrade pip
-python -m pip install playwright
 ```
 
-### 5. Install Chromium
+### 5. Install Python dependencies
+
+Install the packages listed in `requirements.txt`:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### 6. Install Chromium
+
+Playwright requires its browser binaries to be installed separately.
+
+Run:
 
 ```bash
 python -m playwright install chromium
@@ -122,9 +177,37 @@ Linux users may also need system browser dependencies:
 python -m playwright install --with-deps chromium
 ```
 
+### 7. Verify installation
+
+Check that Playwright is installed:
+
+```bash
+python -m pip show playwright
+```
+
+Check installed Playwright browsers:
+
+```bash
+python -m playwright install --list
+```
+
+### 8. Run Rumble Regex
+
+You are now ready to use the script:
+
+```bash
+python rumble.py "https://rumble.com/v123456-example-video.html"
+```
+
+For available options:
+
+```bash
+python rumble.py --help
+```
+
 ## Usage
 
-The script is named `rumble.py`.
+The main script is named `rumble.py`.
 
 ### Standard Rumble video
 
@@ -149,7 +232,7 @@ Replace the example URLs with actual Rumble URLs.
 | `--wait` | Additional JavaScript initialization wait | 8000 |
 | `--headed` | Show the Chromium browser window | Disabled |
 
-### Increase the initialization wait
+### Increase initialization wait
 
 ```bash
 python rumble.py "YOUR_RUMBLE_URL" --wait 15000
@@ -157,7 +240,7 @@ python rumble.py "YOUR_RUMBLE_URL" --wait 15000
 
 Useful when the player takes longer to initialize.
 
-### Increase the navigation timeout
+### Increase navigation timeout
 
 ```bash
 python rumble.py "YOUR_RUMBLE_URL" --timeout 90000
@@ -179,9 +262,7 @@ python rumble.py --help
 
 ## Understanding the Extracted IDs
 
-Rumble may expose several different identifiers.
-
-They should not be treated as interchangeable.
+Rumble may expose several different identifiers. They should not be treated as interchangeable.
 
 ### 1. Embed ID
 
@@ -272,13 +353,13 @@ The browser navigates to the requested Rumble page.
 
 The script waits for the initial document to load.
 
-It can also continue inspecting the available page if navigation reaches its timeout.
+It can also continue inspecting available page content if navigation reaches its timeout.
 
 ### Stage 4: JavaScript Initialization
 
 The script waits for the configured initialization interval.
 
-This gives the Rumble player scripts time to create their elements.
+This gives Rumble player scripts time to create their elements.
 
 ### Stage 5: HTML Inspection
 
@@ -321,7 +402,7 @@ This is particularly useful when the page creates player elements after JavaScri
 
 ### Stage 8: Fallback Extraction
 
-The script combines the results from:
+The script combines results from:
 
 1. Original page HTML.
 2. Embedded JSON metadata.
@@ -597,7 +678,4 @@ See the repository's LICENSE file for licensing information.
 
 **Documentation:** `README.md`
 
-
-## Note
-
-This script is a part of my <a href="https://github.com/zaynkhan100110/ump">ump</a>
+This script is a part of my [UMP](https://github.com/zaynkhan100110/ump) project.
