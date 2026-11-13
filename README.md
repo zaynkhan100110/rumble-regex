@@ -1,5 +1,5 @@
 
-# Rumble Regex
+<h1 align="center">Rumble Regex</h1>
 
 **Extract actual Rumble video player IDs, embed IDs, Shorts clip IDs, and media IDs from Rumble URLs using Python, regular expressions, and Playwright.**
 
@@ -7,7 +7,6 @@
 [![Browser](https://img.shields.io/badge/Browser-Playwright-green)](https://playwright.dev/python/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)](#requirements)
 
-**Repository:** https://github.com/zaynkhan100110/rumble-regex
 
 ---
 
